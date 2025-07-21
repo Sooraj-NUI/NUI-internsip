@@ -1,30 +1,37 @@
-function capitalizeFirstLetter(nameToCap) {
-  const firstCharectorOfUserName = nameToCap?.charAt(0).toLowerCase();
-  const convertedName = nameToCap
-    .toLowerCase()
-    .replace(firstCharectorOfUserName, firstCharectorOfUserName.toUpperCase());
-  return convertedName;
+function capitalizeFirstLetter(userName) {
+  nameAsArray = userName.split("");
+  for (let i = 0; i < nameAsArray.length; i++) {
+    if (i == 0 && nameAsArray[i] !== " ") {
+      nameAsArray[i] = nameAsArray[i].toUpperCase();
+    } else if (nameAsArray[i - 1] == " " && nameAsArray[i] !== " ") {
+      nameAsArray[i] = nameAsArray[i].toUpperCase();
+    }
+  }
+  return nameAsArray.join("");
 }
 
-function addSuffixOrPrefix(nameOfPerson, prefixOfSuffix, keyword) {
+function addSuffixOrPrefix(nameOfPerson, textToAdd, position) {
+  capitalizeFirstLetter(nameOfPerson);
   if (
     typeof nameOfPerson === "string" &&
-    typeof prefixOfSuffix === "string" &&
-    typeof keyword === "string"
+    typeof textToAdd === "string" &&
+    typeof position === "string"
   ) {
     let capitalizedFirstName = capitalizeFirstLetter(nameOfPerson);
-    let capitalizedSuffixOrPreffix = capitalizeFirstLetter(prefixOfSuffix);
+    let capitalizedSuffixOrPreffix = capitalizeFirstLetter(textToAdd);
 
-    if (keyword.toLowerCase() === "prefix") {
+    if (position.toLowerCase() === "prefix") {
       return [capitalizedFirstName, capitalizedSuffixOrPreffix].join(" ");
-    } else if (keyword.toLowerCase() === "suffix") {
+    } else if (position.toLowerCase() === "suffix") {
       return [capitalizedSuffixOrPreffix, capitalizedFirstName].join(" ");
     } else {
-      return "The keyword should be prefix or suffix";
+      return `Allowed values are "prefix" or "suffix"`;
     }
   } else {
-    return "provided input is not a string";
+    return "Inputs must be string";
   }
 }
-console.log(addSuffixOrPrefix("soRaj", "CR7", "prefix"));
+
+console.log(addSuffixOrPrefix("soRaj", "cR", "prefix"));
 console.log(addSuffixOrPrefix("ARun", "mR", "suffix"));
+console.log(addSuffixOrPrefix("anand prasath nair", "CR7", "suffix"));

@@ -1,6 +1,6 @@
 function interchangeAdjacentElements(providedItems, targetIndex) {
-  console.log(typeof providedItems);
-  if (Array.isArray(providedItems) && typeof targetIndex === "number") {
+  console.log(typeof targetIndex);
+  if (Array.isArray(providedItems) && typeof targetIndex === "number" && !isNaN) {
     let targetElement = targetIndex - 1;
 
     if (targetIndex > providedItems.length) {
@@ -15,9 +15,9 @@ function interchangeAdjacentElements(providedItems, targetIndex) {
       providedItems[targetElement + 1] = valueToStore;
     }
 
-    return "Result :", providedItems;
+    return providedItems;
   } else {
-    return "Please proide array of numbers as input";
+    return "Invalid input. Please provide a number as input";
   }
 }
-console.log(interchangeAdjacentElements([10, 20, 30, 40, 50], 2));
+console.log(interchangeAdjacentElements([10, 20, 30, 40, 50],10));
