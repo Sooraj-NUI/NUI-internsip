@@ -1,23 +1,23 @@
 function groupWithInitialChat(userData) {
-  let groupWithInitialValues = [];
-  let grpFullValues = [];
-  let userDataValues = userData.sort();
-  console.log(userDataValues);
-  for (let i = 0; i < userDataValues.length - 1; i++) {
-    console.log(userDataValues[i].charAt(0));
-    for (let j = 0; j < userDataValues.length - 1; j++) {
-      if (userDataValues[j].charAt(0) === userDataValues[j + 1].charAt(0)) {
-        groupWithInitialValues.push(userDataValues[j]);
+  if (!Array.isArray(userData) || userData.length < 1) {
+    return "input should be an array of string with non empty values";
+  }
+  let finalGroup = [];
+  let visitedStartingLetters = new Set();
+  for (let i = 0; i < userData.length; i++) {
+    let firstLetter = userData[i].charAt(0);
+    if (!visitedStartingLetters.has(firstLetter)) {
+      let temporaryGroup = [];
+      for (let j = 0; j < userData.length; j++) {
+        if (userData[j].charAt(0) === firstLetter) {
+          temporaryGroup.push(userData[j]);
+        }
       }
-       if(userDataValues[j].charAt(0)!==userDataValues[j+1].charAt(0)){
-           groupWithInitialValues.push(userDataValues[j])
-          grpFullValues.push(groupWithInitialValues)
-        //   return grpFullValues
-      }
+      finalGroup.push(temporaryGroup);
+      visitedStartingLetters.add(firstLetter);
     }
   }
-  console.log(grpFullValues);
-  return grpFullValues;
+  return finalGroup;
 }
 console.log(
   groupWithInitialChat([
@@ -30,4 +30,3 @@ console.log(
     "kamal",
   ])
 );
-// Input: ["arun", "balu", "cathy", "krish", "aadhir", "aariketh", "kamal"]
