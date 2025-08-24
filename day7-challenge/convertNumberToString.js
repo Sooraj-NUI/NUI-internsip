@@ -1,22 +1,49 @@
-function numberToString(userInput) {
-    userInput = Number(userInput)
-    if (isNaN(userInput) || userInput < 0) {
-        return "inputs must be a number >= 0"
-    }
-    finalString = ""
-    const numberWords = [
-  "zero", "one", "two", "three", "four",
-  "five", "six", "seven", "eight", "nine"
-];
-userInput = userInput.toString()
+function numberToString(numberValue) {
+  numberValue = Number(numberValue);
+  if (
+    isNaN(numberValue) ||
+    typeof numberValue === "string" ||
+    isNaN(Number(numberValue))
+  ) {
+    console.error("inputs must be a number geater than or equal to 0");
+    return false;
+  }
 
-console.log(numberWords[0]);
+  finalString = "";
+  let isNegetive = false
+  const numberWords = [
+    "zero",
+    "one",
+    "two",
+    "three",
+    "four",
+    "five",
+    "six",
+    "seven",
+    "eight",
+    "nine",
+  ];
 
-for (let i = 0;i<userInput.length;i++){
-    console.log(userInput[i])
-console.log(numberWords[userInput[i]])
-finalString = finalString+numberWords[userInput[i]]
+  if (numberValue < 0) {
+    isNegetive = true;
+  numberValue =   numberValue * -1;
+    console.log(numberValue);
+  } else {
+  }
+  numberValue = numberValue.toString();
+
+  console.log(numberWords[0]);
+
+  for (let i = 0; i < numberValue.length; i++) {
+    console.log(numberValue[i]);
+    console.log(numberWords[numberValue[i]]);
+    finalString = finalString + numberWords[numberValue[i]];
+  }
+  if(isNegetive){
+    console.log("negetive "+finalString)
+  }
+  else{
+    console.log(finalString)
+  }
 }
-return finalString;
-}
-console.log(numberToString(98));
+numberToString(-98);

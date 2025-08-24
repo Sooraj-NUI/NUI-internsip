@@ -1,14 +1,18 @@
-function findEvenSum(userInput) {
-  if (!Array.isArray(userInput) || userInput.length<1) {
-    console.log(userInput.length)
-    return "both inputs must be a number";
+function findEvenSum(inputArray) {
+  if (!inputArray || !Array.isArray(inputArray) || inputArray.length === 0) {
+    console.error(inputArray.length);
+    return false;
   }
   let sum = 0;
-  for (let i = 0; i < userInput.length; i++) {
-    if (userInput[i] % 2 === 0) {
-      sum = sum + userInput[i];
+  for (let i = 0; i < inputArray.length; i++) {
+    if (inputArray[i] % 2 === 0) {
+      sum = sum + inputArray[i];
     }
   }
-  return sum;Ï
+  if (sum === 0) {
+    console.error("The array contains only odd numbers");
+    return true;
+  }
+  console.log(sum);
 }
-console.log(findEvenSum([38, 3, 2, 8, 31]));
+findEvenSum([1, 3, 5]);

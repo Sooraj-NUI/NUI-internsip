@@ -1,12 +1,14 @@
-function sumOfMultiples(userInput, multiple) {
-  if (typeof userInput !== "number" || typeof multiple !== "number") {
-    return "both inputs must be a number";
-  } else if (userInput <= 0 || multiple <= 0) {
-    return "inputs must be a positive number";
+function sumOfMultiples(baseNumber, multiple) {
+  if (typeof baseNumber !== "number" || typeof multiple !== "number") {
+    console.error("both inputs must be a number");
+    return false;
+  } else if (baseNumber <= 0 || multiple <= 0) {
+    console.error("Inputs must be a positive number");
+    return false;
   }
   let count = 0;
   for (let i = 1; i <= multiple; i++) {
-    count = count + userInput * i;
+    count = count + baseNumber * i;
   }
   return count;
 }
