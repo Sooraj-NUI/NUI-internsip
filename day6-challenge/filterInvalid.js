@@ -1,10 +1,10 @@
-function filterInvalid(userInput, userInputType) {
-  if (!Array.isArray(userInput) && userInputType !== "string") {
+function filterInvalid(userInput, typeToRemove) {
+  if (!Array.isArray(userInput) && typeToRemove !== "string") {
     return "The values should be in an array and the type to remove should be a string.";
   }
   let filteredValue = [];
   for (let i = 0; i < userInput.length; i++) {
-    if (typeof userInput[i] !== userInputType) filteredValue.push(userInput[i]);
+    if (typeof userInput[i] !== typeToRemove) filteredValue.push(userInput[i]);
   }
   return filteredValue;
 }
