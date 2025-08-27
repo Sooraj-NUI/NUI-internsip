@@ -17,31 +17,53 @@ const input = [
   },
 ];
 
+
 function countUniqueAndDuplicates(arr) {
-  const unique = new Set(arr);
-  const uniqueCount = unique.size;
-  const duplicateCount = arr.length - uniqueCount;
+  const counts = {};
+  arr.map((item) => {
+    counts[item] = (counts[item] || 0) + 1;
+  });
+console.log(counts)
+  let uniqueCount = 0;
+  let duplicateCount = 0;
+
+  for (let key in counts) {
+    uniqueCount++;
+    if (counts[key] > 1) {
+      duplicateCount++;
+    }
+  }
 
   return { uniqueCount, duplicateCount };
 }
 
 const getSkuDetails = () => {
-  const variants = input.flatMap((product) =>
-    product.variants.map((variant) => ({
-      ...variant,
-      productId: product.id,
-      productName: product.name,
-    }))
-  );
+  const variants = [];
+
+
+  for (let i = 0; i < input.length; i++) {
+    const product = input[i];
+    for (let j = 0; j < product.variants.length; j++) {
+      const variant = product.variants[j];
+      variants.push({
+        ...variant,
+        productId: product.id,
+        productName: product.name,
+      });
+    }
+  }
 
   console.log("variants", variants);
-  const skus = variants.map((variant) => variant.sku);
 
+  // collect all skus
+  const skus = variants.map((variant) => variant.sku);
   console.log("skus", skus);
+
   const { uniqueCount, duplicateCount } = countUniqueAndDuplicates(skus);
+
   const result = {};
 
-  variants.forEach((variant) => {
+  variants.map((variant) => {
     const key = variant.sku;
     if (!result[key]) {
       result[key] = {
@@ -61,8 +83,11 @@ const getSkuDetails = () => {
       }
     }
   });
-  result.status = { totalSkus: uniqueCount, duplicated: duplicateCount };
 
+  result.status = { totalSkus: uniqueCount, duplicated: duplicateCount };
   console.log(result);
 };
+
 getSkuDetails();
+
+
